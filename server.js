@@ -1,16 +1,15 @@
 const app = require("./src/app")
 const mongoose = require("mongoose")
 const dotenv = require("dotenv")
+const axios = require("axios")
 
 //* Load ENV
-
 const ProductionMode = process.env.MODE_ENV === "production"
 if (!ProductionMode) {
     dotenv.config()
 }
 
-//* database mongodb connection
-
+//* Database MongoDB Connection
 async function ConnectToDB() {
     try {
         await mongoose.connect(process.env.MONGO_URL)
@@ -21,8 +20,7 @@ async function ConnectToDB() {
     }
 }
 
-//* run server 
-
+//* Run Server
 function startServer() {
     const port = process.env.PORT || 3600
     app.listen(port, () => {
@@ -30,14 +28,16 @@ function startServer() {
             `Server running in ${ProductionMode ? "production" : "development"
             } mode on port ${port}`
         );
+    });
 
-    })
+    setInterval(() => {
+        axios.get("https://leather-store-back-end.onrender.com")
+            .then(() => console.log("Pinged the server to keep it awake."))
+            .catch(err => console.error("Error pinging server:", err));
+    }, 5 * 60 * 1000);
 }
 
-
-//* function run 
-
-
+//* Function Run
 async function run() {
     startServer()
     await ConnectToDB()
