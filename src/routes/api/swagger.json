@@ -1,0 +1,47 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "<leather-store❤️ />",
+    "description": "Description For leather-store Project",
+    "version": "1.0.0"
+  },
+  "components": {
+    "securitySchemes": {
+      "Authorization": {
+        "type": "apiKey",
+        "name": "Authorization",
+        "scheme": "bearer",
+        "in": "header",
+        "description": "User token form authorization: **Bearer [user_token]**"
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "Auth",
+      "description": "This route for login and register and get all user"
+    }
+  ],
+  "paths": {
+    "/auth/register": {
+      "post": {
+        "tags": ["Auth"],
+        "summary": "This api for users register in site",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "example": {
+                  "username": "kasra1382",
+                  "email": "kasra@email.com",
+                  "password": "123456"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
