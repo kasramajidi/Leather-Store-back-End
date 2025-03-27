@@ -40,6 +40,29 @@
               }
             }
           }
+        },
+        "responses": {
+          "200": {
+            "description": "successfully register"
+          },
+          "400": {
+            "description": "Please enter username, email and password"
+          },
+          "401": {
+            "description": "Username must be at least 3 or 15 chars long"
+          },
+          "402": {
+            "description": "The email is invalid"
+          },
+          "403": {
+            "description": "The password is invalid"
+          },
+          "405" : {
+            "description": "Email is already registered."
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
         }
       }
     }
