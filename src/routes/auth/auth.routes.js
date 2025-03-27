@@ -6,4 +6,8 @@ AuthRouter
     .route("/register")
     .post(AuthController.register)
 
+AuthRouter
+    .route("/login")
+    .post(AuthController.login)
+
 module.exports = AuthRouter;
