@@ -1,0 +1,43 @@
+# 🛑 Node.js Dependencies
+node_modules/
+npm-debug.log
+yarn-error.log
+pnpm-debug.log
+package-lock.json
+yarn.lock
+pnpm-lock.yaml
+
+# 🛑 Environment Variables (اطلاعات حساس)
+.env
+.env.local
+.env.development
+.env.production
+
+# 🛑 Logs & Debugging Files
+logs/
+*.log
+debug.log
+error.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# 🛑 IDE & Editor Files
+.vscode/
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# 🛑 OS-Specific Files (فایل‌های سیستمی)
+.DS_Store
+Thumbs.db
+
+# 🛑 Temporary Files (فایل‌های موقت)
+tmp/
+dist/
+build/
+coverage/
+.cache/
