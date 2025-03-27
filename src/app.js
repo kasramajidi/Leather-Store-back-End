@@ -4,6 +4,7 @@ const cookieParse = require("cookie-parser")
 const cors = require("cors")
 const path = require("path")
 
+const AuthRouter = require("./routes/auth/auth.routes")
 //* bodyParser
 app.use(express.urlencoded({ extended: true }))
 app.use(express.json())
@@ -13,6 +14,7 @@ app.use(cookieParse())
 app.use(cors())
 
 //* Routes
+app.use("/auth", AuthRouter);
 
 //* 404 Error Handelr
 app.use((req,res) => {
