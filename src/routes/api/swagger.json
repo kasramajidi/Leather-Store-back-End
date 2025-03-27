@@ -35,7 +35,7 @@
                 "example": {
                   "username": "kasra1382",
                   "email": "kasra@email.com",
-                  "password": "123456"
+                  "password": "Aasjdj1254"
                 }
               }
             }
@@ -59,6 +59,45 @@
           },
           "405" : {
             "description": "Email is already registered."
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/auth/login":{
+      "post": {
+        "tags": ["Auth"],
+        "summary": "This api for users login in site",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "example": {
+                  "email": "kasra@email.com",
+                  "password": "Aasjdj1254"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Login successful!"
+          },
+          "400": {
+            "description": "Please enter email and password"
+          },
+          "401": {
+            "description": "The email is invalid"
+          },
+          "402": {
+            "description": "The password is invalid"
+          },
+          "403": {
+            "description": "Invalid email or password." 
           },
           "500": {
             "description": "Internal Server Error"
