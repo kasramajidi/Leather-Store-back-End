@@ -104,6 +104,20 @@
           }
         }
       }
+    },
+    "/auth/logout": {
+      "post": {
+        "tags": ["Auth"],
+        "summary": "This api for users logout in site",
+        "responses": {
+          "200": {
+            "description": "Login successful!"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
     }
   }
 }

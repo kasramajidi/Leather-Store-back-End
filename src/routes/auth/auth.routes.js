@@ -10,4 +10,8 @@ AuthRouter
     .route("/login")
     .post(AuthController.login)
 
+AuthRouter
+    .route("/logout")
+    .post(AuthController.logOut)
+
 module.exports = AuthRouter;
