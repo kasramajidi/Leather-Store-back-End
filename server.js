@@ -22,19 +22,10 @@ async function ConnectToDB() {
 
 //* Run Server
 function startServer() {
-    const port = process.env.PORT || 3600
+    const port = process.env.PORT || 3600;
     app.listen(port, () => {
-        console.log(
-            `Server running in ${ProductionMode ? "production" : "development"
-            } mode on port ${port}`
-        );
-    });
-
-    setInterval(() => {
-        axios.get("https://leather-store-back-end.onrender.com")
-            .then(() => console.log("Pinged the server to keep it awake."))
-            .catch(err => console.error("Error pinging server:", err));
-    }, 5 * 60 * 1000);
+        console.log(`Server running on port ${port}`);
+    });    
 }
 
 //* Function Run
