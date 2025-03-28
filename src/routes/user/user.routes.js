@@ -7,7 +7,11 @@ UserRouter
     .get(UserController.getAllUser)
 
 UserRouter
-    .route("/getuser/:id")
+    .route("/getuserid/:id")
     .get(UserController.getByID)
-    
+
+UserRouter
+    .route("/getusername/:username")
+    .get(UserController.getByTitle)
+
 module.exports = UserRouter

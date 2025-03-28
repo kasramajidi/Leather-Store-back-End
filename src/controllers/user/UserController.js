@@ -31,3 +31,28 @@ exports.getByID = async (req, res) => {
         res.status(500).json({ message: "Internal Server Error" });
     }
 }
+
+exports.getByTitle = async (req, res) => {
+    try{
+        const {username} = req.params
+
+        if (!username || username.length < 3){
+            return res.status(400).json({
+                message: "name is required"
+            })
+        }
+
+        const getOneName = await UserModel.find({username: {$regex: username, $options: "i"}})
+
+        if (getOneName.length === 0){
+            return res.status(401).json({
+                message: "No user found"
+            })
+        }
+
+        res.status(200).json(getOneName)
+    }catch(err){
+        console.log(err);
+        res.status(500).json({ message: "Internal Server Error" });
+    }
+}
