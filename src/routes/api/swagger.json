@@ -20,6 +20,10 @@
     {
       "name": "Auth",
       "description": "This route for login and register and get all user"
+    },
+    {
+      "name": "User",
+      "description": "This route for user"
     }
   ],
   "paths": {
@@ -57,7 +61,7 @@
           "403": {
             "description": "The password is invalid"
           },
-          "405" : {
+          "405": {
             "description": "Email is already registered."
           },
           "500": {
@@ -66,7 +70,7 @@
         }
       }
     },
-    "/auth/login":{
+    "/auth/login": {
       "post": {
         "tags": ["Auth"],
         "summary": "This api for users login in site",
@@ -97,7 +101,7 @@
             "description": "The password is invalid"
           },
           "403": {
-            "description": "Invalid email or password." 
+            "description": "Invalid email or password."
           },
           "500": {
             "description": "Internal Server Error"
@@ -117,6 +121,166 @@
             "description": "Internal Server Error"
           }
         }
+      }
+    },
+    "user/getAllUser": {
+      "get": {
+        "tags": ["User"],
+        "summary": "This api for get all user in site",
+        "responses": {
+          "200": {
+            "description": "get all user"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "user/getuserid/:id": {
+      "get": {
+        "tags": ["User"],
+        "summary": "This api for get one user by id",
+        "responses": {
+          "200": {
+            "description": "This api has get one user"
+          },
+          "400": {
+            "description": "ID is not vaild"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "parameters": [
+          {
+            "title": "id",
+            "in": "id",
+            "required": true,
+            "type": "string",
+            "description": "You have to enter the id to show you one by one"
+          }
+        ]
+      },
+      "delete": {
+        "tags": ["User"],
+        "summary": "This api for remove user",
+        "responses": {
+          "200": {
+            "description": "This post has been successfully deleted"
+          },
+          "400": {
+            "description": "ID is not vaild"
+          },
+          "401": {
+            "description": "user not found"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "parameters": [
+          {
+            "name": "pageID",
+            "in": "id",
+            "required": true,
+            "type": "string"
+          }
+        ]
+      },
+      "put": {
+        "tags": ["User"],
+        "summary": "This api for update user",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "example": {
+                  "username": "kasra1382",
+                  "email": "kasra@email.com",
+                  "password": "Aasjdj1254"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "This post has been successfully update"
+          },
+          "400": {
+            "description": "ID is not vaild"
+          },
+          "401": {
+            "description": "Please enter username, email and password"
+          },
+          "402": {
+            "description": "Username must be at least 3 or 15 chars long"
+          },
+          "403": {
+            "description": "The email is invalid"
+          },
+          "404":{
+            "description": "The password is invalid"
+          },
+
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "user//getusername/:username":{
+      "get": {
+        "tags": ["User"],
+        "summary": "This api for get one user by username",
+        "responses": {
+          "200": {
+            "description": "This api has get one user"
+          },
+          "400": {
+            "description": "ID is not vaild"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "parameters": [
+          {
+            "title": "username",
+            "in": "username",
+            "required": true,
+            "type": "string",
+            "description": "You have to enter the username to show you one by one"
+          }
+        ]
+      },
+      "delete": {
+        "tags": ["User"],
+        "summary": "This api for remove user",
+        "responses": {
+          "200": {
+            "description": "This post has been successfully deleted"
+          },
+          "400": {
+            "description": "ID is not vaild"
+          },
+          "401": {
+            "description": "user not found"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "parameters": [
+          {
+            "name": "username",
+            "in": "username",
+            "required": true,
+            "type": "string"
+          }
+        ]
       }
     }
   }
