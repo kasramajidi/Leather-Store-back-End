@@ -231,7 +231,7 @@
         }
       }
     },
-    "user//getusername/:username":{
+    "user/getusername/:username":{
       "get": {
         "tags": ["User"],
         "summary": "This api for get one user by username",
