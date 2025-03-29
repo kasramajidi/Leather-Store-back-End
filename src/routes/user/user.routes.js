@@ -14,5 +14,6 @@ UserRouter
 UserRouter
     .route("/getusername/:username")
     .get(UserController.getByTitle)
+    .delete(UserController.removeByTitle)
 
 module.exports = UserRouter

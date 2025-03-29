@@ -116,7 +116,7 @@ exports.updaetID = async (req, res) => {
 
         const emailRegex = /[^@ \t\r\n]+@[^@ \t\r\n]+\.[^@ \t\r\n]+/
 
-        if (!emailRegex.test(email)){
+        if (!emailRegex.test(email)) {
             return res.status(403).json({
                 message: "The email is invalid"
             })
@@ -124,15 +124,15 @@ exports.updaetID = async (req, res) => {
 
         const passwordRegex = /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9]).{8,15}$/
 
-        if (!passwordRegex.test(password)){
+        if (!passwordRegex.test(password)) {
             return res.status(404).json({
                 message: "The password is invalid"
             })
         }
 
         const hashPassword = await bcryptjs.hash(password, 10)
-        
-        const update = await UserModel.findByIdAndUpdate({_id: id}, {
+
+        const update = await UserModel.findByIdAndUpdate({ _id: id }, {
             username,
             email,
             password: hashPassword,
@@ -141,6 +141,34 @@ exports.updaetID = async (req, res) => {
         res.status(200).json({
             message: "This user has been successfully update",
             update
+        })
+
+    } catch (err) {
+        console.log(err);
+        res.status(500).json({ message: "Internal Server Error" });
+    }
+}
+
+exports.removeByTitle = async (req, res) => {
+    try {
+        const { username } = req.params
+
+        if (!username || username.length < 3) {
+            return res.status(400).json({
+                message: "name is required"
+            })
+        }
+
+        const remove = await UserModel.findOneAndDelete({ username })
+
+        if (!remove) {
+            return res.status(401).json({
+                message: "user not found"
+            })
+        }
+
+        res.status(200).json({
+            message: "This User has been successfully deleted"
         })
 
     } catch (err) {
