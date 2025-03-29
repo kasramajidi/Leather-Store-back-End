@@ -9,7 +9,8 @@ UserRouter
 UserRouter
     .route("/getuserid/:id")
     .get(UserController.getByID)
-
+    .delete(UserController.removeID)
+    .put(UserController.updaetID)
 UserRouter
     .route("/getusername/:username")
     .get(UserController.getByTitle)
