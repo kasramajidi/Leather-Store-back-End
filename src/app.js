@@ -7,6 +7,7 @@ const path = require("path")
 const AuthRouter = require("./routes/auth/auth.routes")
 const SwaggerRouter = require("./routes/api/swagger.routes")
 const UserRouter  = require("./routes/user/user.routes")
+const NewsletterRouter = require("./routes/newsletter/newsletter.routes")
 //* bodyParser
 app.use(express.urlencoded({ extended: true }))
 app.use(express.json())
@@ -19,6 +20,7 @@ app.use(cors())
 app.use("/auth", AuthRouter);
 app.use("/api", SwaggerRouter)
 app.use("/user", UserRouter)
+app.use("/newsletter", NewsletterRouter)
 
 //* 404 Error Handelr
 app.use((req,res) => {
