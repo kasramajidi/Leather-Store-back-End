@@ -24,6 +24,10 @@
     {
       "name": "User",
       "description": "This route for user"
+    },
+    {
+      "name": "Newsletter",
+      "description": "This route for Newsletter"
     }
   ],
   "paths": {
@@ -281,6 +285,116 @@
             "type": "string"
           }
         ]
+      }
+    },
+    "newsletter/create": {
+      "post": {
+        "tags": ["Newsletter"],
+        "summary": "This api for users Newsletter in site",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "example": {
+                  "email": "kasra@email.com"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "You have successfully subscribed to the newsletter"
+          },
+          "400": {
+            "description": "Please enter email"
+          },
+          "401": {
+            "description": "The email is invalid"
+          },
+          "402": {
+            "description": "Email is already registered."
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "newsletter/getall":{
+      "get": {
+        "tags": ["Newsletter"],
+        "summary": "This api for get all Newsletter in site",
+        "responses": {
+          "200": {
+            "description": "get all Newsletter"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "newsletter/:id":{
+      "delete": {
+        "tags": ["Newsletter"],
+        "summary": "This api for remove Newsletter",
+        "responses": {
+          "200": {
+            "description": "This Newsletter has been successfully deleted"
+          },
+          "400": {
+            "description": "ID is not vaild"
+          },
+          "401": {
+            "description": "Newsletter not found"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "parameters": [
+          {
+            "name": "pageID",
+            "in": "id",
+            "required": true,
+            "type": "string"
+          }
+        ]
+      }, 
+      "put": {
+        "tags": ["Newsletter"],
+        "summary": "This api for update Newsletter",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "example": {
+                  "email": "kasra@email.com"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "This post has been successfully update"
+          },
+          "400": {
+            "description": "ID is not Valid"
+          },
+          "401": {
+            "description": "Please enter email"
+          },
+          "402": {
+            "description": "The email is invalid"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
       }
     }
   }

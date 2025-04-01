@@ -10,4 +10,9 @@ NewsletterRouter
     .route("/getall")
     .get(NewsletterController.getAll)
 
+NewsletterRouter
+    .route("/:id")
+    .delete(NewsletterController.remove)
+    .put(NewsletterController.update)
+
 module.exports = NewsletterRouter;
