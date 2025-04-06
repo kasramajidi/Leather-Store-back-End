@@ -16,5 +16,12 @@ CriticismsRouter
     .delete(CriticismsControllers.remove)
     .put(CriticismsControllers.update)
 
+CriticismsRouter
+    .route("/confirm/:id")
+    .put(CriticismsControllers.confirm)
+
+CriticismsRouter
+    .route("/confirm")
+    .get(CriticismsControllers.confirmedTrue)
 
 module.exports = CriticismsRouter

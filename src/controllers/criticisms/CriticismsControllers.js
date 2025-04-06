@@ -42,23 +42,10 @@ exports.create = async (req, res) => {
             })
         }
 
-        const firstNameRegex = /^[a-z]{3,15}$/
-        if (!firstNameRegex.test(firstName)) {
-            return res.status(401).json({
-                message: "firstName and lastName must be at least 3 or 15 chars long"
-            })
-        }
-
-        const lastNameRegex = /^[a-z]{3,15}$/
-        if (!lastNameRegex.test(lastName)) {
-            return res.status(401).json({
-                message: "firstName and lastName must be at least 3 or 15 chars long"
-            })
-        }
-
+ 
         const emailRegex = /[^@ \t\r\n]+@[^@ \t\r\n]+\.[^@ \t\r\n]+/
         if (!emailRegex.test(email)) {
-            return res.status(402).json({
+            return res.status(409).json({
                 message: "The email is invalid"
             })
         }
@@ -66,13 +53,13 @@ exports.create = async (req, res) => {
         const numberRegex = /^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/
 
         if (!numberRegex.test(number)) {
-            return res.status(403).json({
+            return res.status(410).json({
                 message: "The phone is invalid"
             })
         }
 
         if (typeof rating !== "number" || rating < 1 || rating > 5) {
-            return res.status(404).json({
+            return res.status(411).json({
                 message: "Rating must be a number between 1 and 5"
             });
         }
@@ -131,11 +118,11 @@ exports.remove = async (req, res) => {
 }
 
 exports.update = async (req, res) => {
-    try{
-        const {id} = req.params
-        
-        if (!mongoose.Types.ObjectId.isValid(id)){
-            return res.status(400).json({
+    try {
+        const { id } = req.params
+
+        if (!mongoose.Types.ObjectId.isValid(id)) {
+            return res.status(412).json({
                 message: "ID is not valid"
             })
         }
@@ -178,23 +165,9 @@ exports.update = async (req, res) => {
             })
         }
 
-        const firstNameRegex = /^[a-z]{3,15}$/
-        if (!firstNameRegex.test(firstName)) {
-            return res.status(401).json({
-                message: "firstName and lastName must be at least 3 or 15 chars long"
-            })
-        }
-
-        const lastNameRegex = /^[a-z]{3,15}$/
-        if (!lastNameRegex.test(lastName)) {
-            return res.status(401).json({
-                message: "firstName and lastName must be at least 3 or 15 chars long"
-            })
-        }
-
         const emailRegex = /[^@ \t\r\n]+@[^@ \t\r\n]+\.[^@ \t\r\n]+/
         if (!emailRegex.test(email)) {
-            return res.status(402).json({
+            return res.status(409).json({
                 message: "The email is invalid"
             })
         }
@@ -202,18 +175,18 @@ exports.update = async (req, res) => {
         const numberRegex = /^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/
 
         if (!numberRegex.test(number)) {
-            return res.status(403).json({
+            return res.status(410).json({
                 message: "The phone is invalid"
             })
         }
 
         if (typeof rating !== "number" || rating < 1 || rating > 5) {
-            return res.status(404).json({
+            return res.status(411).json({
                 message: "Rating must be a number between 1 and 5"
             });
         }
 
-        const update = await CriticismsModel.findOneAndUpdate({_id: id}, {
+        const update = await CriticismsModel.findOneAndUpdate({ _id: id }, {
             firstName,
             lastName,
             description,
@@ -227,7 +200,57 @@ exports.update = async (req, res) => {
             update
         })
 
-    }catch(err){
+    } catch (err) {
+        console.log(err);
+        res.status(500).json({ message: "Internal Server Error" });
+    }
+}
+
+exports.confirm = async (req, res) => {
+    try {
+        const { id } = req.params
+        if (!mongoose.Types.ObjectId.isValid(id)) {
+            return res.status(400).json({
+                message: "ID is not valid"
+            })
+        }
+
+        const update = await CriticismsModel.findByIdAndUpdate(
+            id,
+            { confirmed: true },
+            { new: true }
+        )
+
+        if (!update) {
+            return res.status(401).json({ message: "Criticism not found" });
+        }
+
+        res.status(200).json({
+            message: "Criticism confirmed successfully",
+            data: update
+        });
+    } catch (err) {
+        console.log(err);
+        res.status(500).json({ message: "Internal Server Error" });
+    }
+}
+
+exports.confirmedTrue = async (req, res) => {
+    try {
+        const { confirmed } = req.query
+
+        let filter = {}
+
+        if (confirmed === "true") {
+            filter.confirmed = true
+        } else if (confirmed === "false") {
+            filter.confirmed = false
+        }
+
+        const findUp = await CriticismsModel.find(filter)
+
+        res.status(200).json(findUp)
+    } catch (err) {
         console.log(err);
         res.status(500).json({ message: "Internal Server Error" });
     }

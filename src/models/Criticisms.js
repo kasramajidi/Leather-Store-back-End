@@ -33,6 +33,10 @@
             required: true,
             min: 0,
             max:5
+        },
+        confirmed:{
+            type: Boolean,
+            default: false
         }
     }, { timestamps: true })
 
