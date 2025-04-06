@@ -8,6 +8,7 @@ const AuthRouter = require("./routes/auth/auth.routes")
 const SwaggerRouter = require("./routes/api/swagger.routes")
 const UserRouter  = require("./routes/user/user.routes")
 const NewsletterRouter = require("./routes/newsletter/newsletter.routes")
+const CriticismsRouter = require("./routes/criticisms/criticisms.routes")
 //* bodyParser
 app.use(express.urlencoded({ extended: true }))
 app.use(express.json())
@@ -21,7 +22,7 @@ app.use("/auth", AuthRouter);
 app.use("/api", SwaggerRouter)
 app.use("/user", UserRouter)
 app.use("/newsletter", NewsletterRouter)
-
+app.use("/criticisms", CriticismsRouter)
 //* 404 Error Handelr
 app.use((req,res) => {
     console.log("this path is not found:", req.path);
