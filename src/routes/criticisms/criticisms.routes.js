@@ -10,4 +10,11 @@ CriticismsRouter
 CriticismsRouter
     .route("/getall")
     .get(CriticismsControllers.getAll)
+
+CriticismsRouter
+    .route("/:id")
+    .delete(CriticismsControllers.remove)
+    .put(CriticismsControllers.update)
+
+
 module.exports = CriticismsRouter
