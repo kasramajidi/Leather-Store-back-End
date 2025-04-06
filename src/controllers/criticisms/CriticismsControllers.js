@@ -45,7 +45,7 @@ exports.create = async (req, res) => {
  
         const emailRegex = /[^@ \t\r\n]+@[^@ \t\r\n]+\.[^@ \t\r\n]+/
         if (!emailRegex.test(email)) {
-            return res.status(409).json({
+            return res.status(407).json({
                 message: "The email is invalid"
             })
         }
@@ -53,13 +53,13 @@ exports.create = async (req, res) => {
         const numberRegex = /^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/
 
         if (!numberRegex.test(number)) {
-            return res.status(410).json({
+            return res.status(408).json({
                 message: "The phone is invalid"
             })
         }
 
         if (typeof rating !== "number" || rating < 1 || rating > 5) {
-            return res.status(411).json({
+            return res.status(409).json({
                 message: "Rating must be a number between 1 and 5"
             });
         }
@@ -167,7 +167,7 @@ exports.update = async (req, res) => {
 
         const emailRegex = /[^@ \t\r\n]+@[^@ \t\r\n]+\.[^@ \t\r\n]+/
         if (!emailRegex.test(email)) {
-            return res.status(409).json({
+            return res.status(407).json({
                 message: "The email is invalid"
             })
         }
@@ -175,13 +175,13 @@ exports.update = async (req, res) => {
         const numberRegex = /^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/
 
         if (!numberRegex.test(number)) {
-            return res.status(410).json({
+            return res.status(408).json({
                 message: "The phone is invalid"
             })
         }
 
         if (typeof rating !== "number" || rating < 1 || rating > 5) {
-            return res.status(411).json({
+            return res.status(409).json({
                 message: "Rating must be a number between 1 and 5"
             });
         }
